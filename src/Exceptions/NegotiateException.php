@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Fyre\Negotiate\Exceptions;
+namespace Fyre\Http\Exceptions;
 
 use
     RunTimeException;

@@ -20,7 +20,7 @@ composer require fyre/negotiate
 In PHP:
 
 ```php
-use Fyre\Negotiate\Negotiate;
+use Fyre\Http\Negotiate;
 ```
 
 

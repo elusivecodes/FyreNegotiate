@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Tests;
 
 use
-    Fyre\Negotiate\Exceptions\NegotiateException,
-    Fyre\Negotiate\Negotiate,
+    Fyre\Http\Exceptions\NegotiateException,
+    Fyre\Http\Negotiate,
     PHPUnit\Framework\TestCase;
 
 final class NegotiateTest extends TestCase
 {
 
-    public function testNegotiateContent(): void
+    public function testContent(): void
     {
         $this->assertEquals(
             'text/html',
@@ -19,7 +19,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateContentMultiple(): void
+    public function testContentMultiple(): void
     {
         $this->assertEquals(
             'text/html',
@@ -27,7 +27,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateContentParams(): void
+    public function testContentParams(): void
     {
         $this->assertEquals(
             'appliation/signed-exchange',
@@ -35,7 +35,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateContentParamsNotMatch(): void
+    public function testContentParamsNotMatch(): void
     {
         $this->assertEquals(
             'text/plain',
@@ -43,7 +43,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateContentParamsDefault(): void
+    public function testContentParamsDefault(): void
     {
         $this->assertEquals(
             'text/plain',
@@ -51,14 +51,14 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateContentEmpty(): void
+    public function testContentEmpty(): void
     {
         $this->expectException(NegotiateException::class);
     
         Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', []);
     }
 
-    public function testNegotiateEncoding(): void
+    public function testEncoding(): void
     {
         $this->assertEquals(
             'deflate',
@@ -66,7 +66,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateEncodingMultiple(): void
+    public function testEncodingMultiple(): void
     {
         $this->assertEquals(
             'deflate',
@@ -74,7 +74,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateEncodingQuality(): void
+    public function testEncodingQuality(): void
     {
         $this->assertEquals(
             'gzip',
@@ -82,7 +82,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateEncodingDefault(): void
+    public function testEncodingDefault(): void
     {
         $this->assertEquals(
             'any',
@@ -90,7 +90,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateEncodingEmpty(): void
+    public function testEncodingEmpty(): void
     {
         $this->assertEquals(
             'identity',
@@ -98,7 +98,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateLanguage(): void
+    public function testLanguage(): void
     {
         $this->assertEquals(
             'en-GB',
@@ -106,7 +106,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateLanguageMultiple(): void
+    public function testLanguageMultiple(): void
     {
         $this->assertEquals(
             'en-GB',
@@ -114,7 +114,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateLanguageQuality(): void
+    public function testLanguageQuality(): void
     {
         $this->assertEquals(
             'en-US',
@@ -122,7 +122,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateLanguageLocales(): void
+    public function testLanguageLocales(): void
     {
         $this->assertEquals(
             'en-GB',
@@ -130,7 +130,7 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testNegotiateLanguageEmpty(): void
+    public function testLanguageEmpty(): void
     {
         $this->expectException(NegotiateException::class);
     

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Fyre\Negotiate;
+namespace Fyre\Http;
 
 use
-    Fyre\Negotiate\Exceptions\NegotiateException;
+    Fyre\Http\Exceptions\NegotiateException;
 
 use function
     array_merge,
