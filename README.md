@@ -14,7 +14,7 @@
 **Using Composer**
 
 ```
-composer install fyre/negotiate
+composer require fyre/negotiate
 ```
 
 In PHP:
