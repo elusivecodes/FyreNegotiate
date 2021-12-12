@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Fyre\Http;
 
 use
-    Fyre\Http\Exceptions\NegotiateException;
+    InvalidArgumentException;
 
 use function
     array_merge,
@@ -66,12 +66,12 @@ abstract class Negotiate
      * @param array $supported The supported values.
      * @param array $options Options for comparison.
      * @return string The best match.
-     * @throws NegotiateException if no supported values are supplied.
+     * @throws InvalidArgumentException if no supported values are supplied.
      */
     protected static function getBestMatch(string $accepted = null, array $supported, array $options = []): string
     {
         if ($supported === []) {
-            throw NegotiateException::forNoSupportedValues();
+            throw new InvalidArgumentException('No supported values supplied');
         }
 
         $options['enforceTypes'] ??= false;

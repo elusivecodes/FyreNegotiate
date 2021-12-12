@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Tests;
 
 use
-    Fyre\Http\Exceptions\NegotiateException,
     Fyre\Http\Negotiate,
+    InvalidArgumentException,
     PHPUnit\Framework\TestCase;
 
 final class NegotiateTest extends TestCase
@@ -53,7 +53,7 @@ final class NegotiateTest extends TestCase
 
     public function testContentEmpty(): void
     {
-        $this->expectException(NegotiateException::class);
+        $this->expectException(InvalidArgumentException::class);
     
         Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', []);
     }
@@ -132,7 +132,7 @@ final class NegotiateTest extends TestCase
 
     public function testLanguageEmpty(): void
     {
-        $this->expectException(NegotiateException::class);
+        $this->expectException(InvalidArgumentException::class);
     
         Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', []);
     }
