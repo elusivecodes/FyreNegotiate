@@ -13,7 +13,7 @@ final class NegotiateTest extends TestCase
 
     public function testContent(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'text/html',
             Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/html'])
         );
@@ -21,7 +21,7 @@ final class NegotiateTest extends TestCase
 
     public function testContentMultiple(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'text/html',
             Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['application/xml', 'text/html'])
         );
@@ -29,7 +29,7 @@ final class NegotiateTest extends TestCase
 
     public function testContentParams(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'appliation/signed-exchange',
             Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/plain', 'appliation/signed-exchange;v=b3'])
         );
@@ -37,7 +37,7 @@ final class NegotiateTest extends TestCase
 
     public function testContentParamsNotMatch(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'text/plain',
             Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/plain', 'appliation/signed-exchange;v=b2'])
         );
@@ -45,7 +45,7 @@ final class NegotiateTest extends TestCase
 
     public function testContentParamsDefault(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'text/plain',
             Negotiate::content('text/html', ['text/plain'])
         );
@@ -60,7 +60,7 @@ final class NegotiateTest extends TestCase
 
     public function testEncoding(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'deflate',
             Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['deflate'])
         );
@@ -68,7 +68,7 @@ final class NegotiateTest extends TestCase
 
     public function testEncodingMultiple(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'deflate',
             Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['gzip', 'deflate'])
         );
@@ -76,7 +76,7 @@ final class NegotiateTest extends TestCase
 
     public function testEncodingQuality(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'gzip',
             Negotiate::encoding('deflate;q=0.9, gzip, *;q=0.5', ['gzip', 'deflate'])
         );
@@ -84,7 +84,7 @@ final class NegotiateTest extends TestCase
 
     public function testEncodingDefault(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'any',
             Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['any'])
         );
@@ -92,7 +92,7 @@ final class NegotiateTest extends TestCase
 
     public function testEncodingEmpty(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'identity',
             Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', [])
         );
@@ -100,7 +100,7 @@ final class NegotiateTest extends TestCase
 
     public function testLanguage(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'en-GB',
             Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', ['en-GB'])
         );
@@ -108,7 +108,7 @@ final class NegotiateTest extends TestCase
 
     public function testLanguageMultiple(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'en-GB',
             Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', ['en-GB', 'en-US', 'en'])
         );
@@ -116,7 +116,7 @@ final class NegotiateTest extends TestCase
 
     public function testLanguageQuality(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'en-US',
             Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-US', 'en'])
         );
@@ -124,7 +124,7 @@ final class NegotiateTest extends TestCase
 
     public function testLanguageLocales(): void
     {
-        $this->assertEquals(
+        $this->assertSame(
             'en-GB',
             Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-GB', 'en'])
         );
