@@ -1,6 +1,6 @@
 # FyreNegotiate
 
-**FyreNegotiate** is a free, negotiation library for *PHP*.
+**FyreNegotiate** is a free, open-source negotiation library for *PHP*.
 
 
 ## Table Of Contents
