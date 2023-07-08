@@ -3,22 +3,20 @@ declare(strict_types=1);
 
 namespace Fyre\Http;
 
-use
-    InvalidArgumentException;
+use InvalidArgumentException;
 
-use function
-    array_merge,
-    array_reduce,
-    array_shift,
-    array_unique,
-    count,
-    explode,
-    in_array,
-    preg_match,
-    strtok,
-    substr_count,
-    trim,
-    usort;
+use function array_merge;
+use function array_reduce;
+use function array_shift;
+use function array_unique;
+use function count;
+use function explode;
+use function in_array;
+use function preg_match;
+use function strtok;
+use function substr_count;
+use function trim;
+use function usort;
 
 /**
  * Negotiate
@@ -30,12 +28,15 @@ abstract class Negotiate
      * Negotiate a content type.
      * @param string $accepted The accept content header.
      * @param array $supported The supported content types.
-     * @param bool $strict Whether to not use a default fallback.
+     * @param bool $strict Whether to use the default fallback.
      * @return string The negotiated content types.
      */
     public static function content(string $accepted, array $supported, bool $strict = false): string
     {
-        return static::getBestMatch($accepted, $supported, ['enforceTypes' => true, 'strict' => $strict]);
+        return static::getBestMatch($accepted, $supported, [
+            'strict' => $strict,
+            'enforceTypes' => true
+        ]);
     }
 
     /**
@@ -57,7 +58,9 @@ abstract class Negotiate
      */
     public static function language(string $accepted, array $supported): string
     {
-        return static::getBestMatch($accepted, $supported, ['matchLocales' => true]);
+        return static::getBestMatch($accepted, $supported, [
+            'matchLocales' => true
+        ]);
     }
 
     /**
@@ -79,9 +82,9 @@ abstract class Negotiate
         $options['matchLocales'] ??= false;
 
         if ($options['strict']) {
-            $default ??= '';
+            $default = '';
         } else {
-            $default ??= $supported[0];
+            $default = $supported[0] ?? '';
         }
 
         if (!$accepted) {
@@ -247,11 +250,7 @@ abstract class Negotiate
                 $bVal = count($b['params']);
             }
 
-            if ($aVal === $bVal) {
-                return 0;
-            }
-
-            return $aVal < $bVal ? 1 : -1;
+            return $bVal <=> $aVal;
         });
 
         return $results;

@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Http\Negotiate,
-    InvalidArgumentException,
-    PHPUnit\Framework\TestCase;
+use Fyre\Http\Negotiate;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
 final class NegotiateTest extends TestCase
 {
