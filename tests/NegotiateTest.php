@@ -9,13 +9,19 @@ use PHPUnit\Framework\TestCase;
 
 final class NegotiateTest extends TestCase
 {
-
     public function testContent(): void
     {
         $this->assertSame(
             'text/html',
             Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/html'])
         );
+    }
+
+    public function testContentEmpty(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', []);
     }
 
     public function testContentMultiple(): void
@@ -34,14 +40,6 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testContentParamsNotMatch(): void
-    {
-        $this->assertSame(
-            'text/plain',
-            Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/plain', 'appliation/signed-exchange;v=b2'])
-        );
-    }
-
     public function testContentParamsDefault(): void
     {
         $this->assertSame(
@@ -50,11 +48,12 @@ final class NegotiateTest extends TestCase
         );
     }
 
-    public function testContentEmpty(): void
+    public function testContentParamsNotMatch(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-    
-        Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', []);
+        $this->assertSame(
+            'text/plain',
+            Negotiate::content('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,appliation/signed-exchange;v=b3;q=0.9', ['text/plain', 'appliation/signed-exchange;v=b2'])
+        );
     }
 
     public function testEncoding(): void
@@ -62,22 +61,6 @@ final class NegotiateTest extends TestCase
         $this->assertSame(
             'deflate',
             Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['deflate'])
-        );
-    }
-
-    public function testEncodingMultiple(): void
-    {
-        $this->assertSame(
-            'deflate',
-            Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['gzip', 'deflate'])
-        );
-    }
-
-    public function testEncodingQuality(): void
-    {
-        $this->assertSame(
-            'gzip',
-            Negotiate::encoding('deflate;q=0.9, gzip, *;q=0.5', ['gzip', 'deflate'])
         );
     }
 
@@ -97,11 +80,42 @@ final class NegotiateTest extends TestCase
         );
     }
 
+    public function testEncodingMultiple(): void
+    {
+        $this->assertSame(
+            'deflate',
+            Negotiate::encoding('deflate, gzip;q=0.9, *;q=0.5', ['gzip', 'deflate'])
+        );
+    }
+
+    public function testEncodingQuality(): void
+    {
+        $this->assertSame(
+            'gzip',
+            Negotiate::encoding('deflate;q=0.9, gzip, *;q=0.5', ['gzip', 'deflate'])
+        );
+    }
+
     public function testLanguage(): void
     {
         $this->assertSame(
             'en-GB',
             Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', ['en-GB'])
+        );
+    }
+
+    public function testLanguageEmpty(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', []);
+    }
+
+    public function testLanguageLocales(): void
+    {
+        $this->assertSame(
+            'en-GB',
+            Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-GB', 'en'])
         );
     }
 
@@ -120,20 +134,4 @@ final class NegotiateTest extends TestCase
             Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-US', 'en'])
         );
     }
-
-    public function testLanguageLocales(): void
-    {
-        $this->assertSame(
-            'en-GB',
-            Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-GB', 'en'])
-        );
-    }
-
-    public function testLanguageEmpty(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-    
-        Negotiate::language('en-GB,en-US;q=0.9,en;q=0.8', []);
-    }
-
 }

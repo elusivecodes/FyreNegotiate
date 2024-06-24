@@ -23,7 +23,6 @@ use function usort;
  */
 abstract class Negotiate
 {
-
     /**
      * Negotiate a content type.
      * @param string $accepted The accept content header.
@@ -100,7 +99,7 @@ abstract class Negotiate
             []
         );
 
-        foreach ($accepted AS $a) {
+        foreach ($accepted as $a) {
             if (!$a['q']) {
                 continue;
             }
@@ -109,7 +108,7 @@ abstract class Negotiate
                 return $supported[0]['value'];
             }
 
-            foreach ($supported AS $b) {
+            foreach ($supported as $b) {
                 if (static::match($a, $b, $options)) {
                     return $b['value'];
                 }
@@ -166,7 +165,7 @@ abstract class Negotiate
             return false;
         }
 
-        foreach ($b AS $label => $value) {
+        foreach ($b as $label => $value) {
             $test = $a[$label] ?? null;
 
             if ($test !== $value) {
@@ -209,13 +208,13 @@ abstract class Negotiate
         $results = [];
         $parts = explode(',', $header);
 
-        foreach ($parts AS $part) {
+        foreach ($parts as $part) {
             $pairs = explode(';', $part);
             $value = array_shift($pairs);
 
             $parameters = [];
 
-            foreach ($pairs AS $pair) {
+            foreach ($pairs as $pair) {
                 if (!preg_match('/^(.+?)=(["\']?)(.*?)(?:\2)$/', $pair, $match)) {
                     continue;
                 }
@@ -255,5 +254,4 @@ abstract class Negotiate
 
         return $results;
     }
-
 }
