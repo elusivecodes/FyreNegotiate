@@ -25,6 +25,7 @@ abstract class Negotiate
 {
     /**
      * Negotiate a content type.
+     *
      * @param string $accepted The accept content header.
      * @param array $supported The supported content types.
      * @param bool $strict Whether to use the default fallback.
@@ -34,12 +35,13 @@ abstract class Negotiate
     {
         return static::getBestMatch($accepted, $supported, [
             'strict' => $strict,
-            'enforceTypes' => true
+            'enforceTypes' => true,
         ]);
     }
 
     /**
      * Negotiate an encoding.
+     *
      * @param string $accepted The accept encoding header.
      * @param array $supported The supported encodings.
      * @return string The negotiated encoding.
@@ -51,6 +53,7 @@ abstract class Negotiate
 
     /**
      * Negotiate a language.
+     *
      * @param string $accepted The accept language header.
      * @param array $supported The supported languages.
      * @return string The negotiated language.
@@ -58,19 +61,21 @@ abstract class Negotiate
     public static function language(string $accepted, array $supported): string
     {
         return static::getBestMatch($accepted, $supported, [
-            'matchLocales' => true
+            'matchLocales' => true,
         ]);
     }
 
     /**
      * Get the best match for a header.
+     *
      * @param string $accepted The accepted header value.
      * @param array $supported The supported values.
      * @param array $options Options for comparison.
      * @return string The best match.
+     *
      * @throws InvalidArgumentException if no supported values are supplied.
      */
-    protected static function getBestMatch(string $accepted = null, array $supported, array $options = []): string
+    protected static function getBestMatch(string $accepted, array $supported, array $options = []): string
     {
         if ($supported === []) {
             throw new InvalidArgumentException('No supported values supplied');
@@ -120,6 +125,7 @@ abstract class Negotiate
 
     /**
      * Match values.
+     *
      * @param array $a The first value.
      * @param array $b The second value.
      * @param array $options Options for comparison.
@@ -144,6 +150,7 @@ abstract class Negotiate
 
     /**
      * Match locale strings.
+     *
      * @param string $a The first locale string.
      * @param string $b The second locale string.
      * @return bool TRUE if the locale strings match, otherwise FALSE.
@@ -155,6 +162,7 @@ abstract class Negotiate
 
     /**
      * Match parameters.
+     *
      * @param array $a The first parameters.
      * @param array $b The second parameters.
      * @return bool TRUE if the parameters match, otherwise FALSE.
@@ -178,6 +186,7 @@ abstract class Negotiate
 
     /**
      * Match sub types.
+     *
      * @param string $a The first value.
      * @param string $b The second value.
      * @return bool TRUE if the sub types match, otherwise FALSE.
@@ -200,6 +209,7 @@ abstract class Negotiate
 
     /**
      * Parse a header for accepted values.
+     *
      * @param string $header The header string.
      * @return array The accepted values.
      */
