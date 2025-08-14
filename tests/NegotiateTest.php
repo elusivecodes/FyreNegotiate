@@ -4,8 +4,11 @@ declare(strict_types=1);
 namespace Tests;
 
 use Fyre\Http\Negotiate;
+use Fyre\Utility\Traits\MacroTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+
+use function class_uses;
 
 final class NegotiateTest extends TestCase
 {
@@ -132,6 +135,14 @@ final class NegotiateTest extends TestCase
         $this->assertSame(
             'en-US',
             Negotiate::language('ru-RU;q=0.9,en-US,en;q=0.8', ['ru-RU', 'en-US', 'en'])
+        );
+    }
+
+    public function testMacroable(): void
+    {
+        $this->assertContains(
+            MacroTrait::class,
+            class_uses(Negotiate::class)
         );
     }
 }
