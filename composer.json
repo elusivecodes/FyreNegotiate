@@ -19,6 +19,9 @@
             "Tests\\": "tests/"
         }
     },
+    "require": {
+        "fyre/macro": "^1.0"
+    },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.59",
         "fyre/php-cs-fixer-config": "^1.0",
@@ -28,8 +31,5 @@
         "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
         "cs-fix": "php-cs-fixer fix --ansi --verbose --diff",
         "test": "phpunit tests"
-    },
-    "require": {
-        "fyre/macro": "^1.0"
     }
 }
