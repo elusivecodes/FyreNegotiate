@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Fyre\Http;
 
-use Fyre\Utility\Traits\MacroTrait;
+use Fyre\Utility\Traits\StaticMacroTrait;
 use InvalidArgumentException;
 
 use function array_merge;
@@ -24,7 +24,7 @@ use function usort;
  */
 abstract class Negotiate
 {
-    use MacroTrait;
+    use StaticMacroTrait;
 
     /**
      * Negotiate a content type.

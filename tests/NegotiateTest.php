@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Fyre\Http\Negotiate;
-use Fyre\Utility\Traits\MacroTrait;
+use Fyre\Utility\Traits\StaticMacroTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -141,7 +141,7 @@ final class NegotiateTest extends TestCase
     public function testMacroable(): void
     {
         $this->assertContains(
-            MacroTrait::class,
+            StaticMacroTrait::class,
             class_uses(Negotiate::class)
         );
     }
