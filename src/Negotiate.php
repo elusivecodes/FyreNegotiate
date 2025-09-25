@@ -103,7 +103,7 @@ abstract class Negotiate
         $supported = array_unique($supported);
         $supported = array_reduce(
             $supported,
-            fn(array $acc, string $value): array => array_merge($acc, static::parseHeader($value)),
+            static fn(array $acc, string $value): array => array_merge($acc, static::parseHeader($value)),
             []
         );
 
@@ -248,7 +248,7 @@ abstract class Negotiate
             ];
         }
 
-        usort($results, function(array $a, array $b): int {
+        usort($results, static function(array $a, array $b): int {
             $aVal = $a['q'];
             $bVal = $b['q'];
 
